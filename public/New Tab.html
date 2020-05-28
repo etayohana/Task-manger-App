@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)chrome-search://local-ntp/local-ntp.html -->
+<html lang="en" dir="ltr" class="inited"><!-- Copyright 2015 The Chromium Authors. All rights reserved.
+     Use of this source code is governed by a BSD-style license that can be
+     found in the LICENSE file. --><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="chrome-search://local-ntp/animations.css">
+  <link rel="stylesheet" href="chrome-search://local-ntp/local-ntp-common.css">
+  <link rel="stylesheet" href="chrome-search://local-ntp/customize.css">
+  <link rel="stylesheet" href="chrome-search://local-ntp/doodles.css">
+  <link rel="stylesheet" href="chrome-search://local-ntp/local-ntp.css">
+  <link rel="stylesheet" href="chrome-search://local-ntp/theme.css">
+  <link rel="stylesheet" href="chrome-search://local-ntp/voice.css">
+  
+  <meta http-equiv="Content-Security-Policy" content="object-src &#39;none&#39;;child-src chrome-search://most-visited/ https://*.google.com/ ;script-src &#39;strict-dynamic&#39; &#39;sha256-1+GSDjMMklBjZY0QiWq+tGupCvajw4Xbn46ect2mZgM=&#39; &#39;sha256-2mX1M62Fd0u8q0dQY2mRsK5S1NS9jJuQAvyE8tD0dkQ=&#39; &#39;sha256-EtIKSV82ixJHE3AzqhoiVbUGKG+Kd8XS0fFToow29o0=&#39; &#39;sha256-HqdPsO6hNmT/mfSeGdcX3eEGrZVva7AKD2Z2+1ujCZ8=&#39; &#39;sha256-VKboFBdOdpwCwCkw/y71xPwtM/YeZSZvOP8Fn2OijOM=&#39; &#39;sha256-IEF9PjeyU0vsr61C8cm3JQOerOYWdBsaGddCSPp6tZs=&#39; &#39;sha256-C9ctze2LhHtwL+fcPVPkmVRYjQgXTGs4xfBAzlQwGWk=&#39; &#39;sha256-mSe7634tKLZEHHGTdHrwTRB3i1ErlifsMOo09n14+k0=&#39;;">
+  <script src="chrome-search://local-ntp/assert.js" integrity="sha256-2mX1M62Fd0u8q0dQY2mRsK5S1NS9jJuQAvyE8tD0dkQ="></script>
+  <script src="chrome-search://local-ntp/animations.js" integrity="sha256-1+GSDjMMklBjZY0QiWq+tGupCvajw4Xbn46ect2mZgM="></script>
+  <script src="chrome-search://local-ntp/config.js" integrity="sha256-mSe7634tKLZEHHGTdHrwTRB3i1ErlifsMOo09n14+k0="></script>
+  <script src="chrome-search://local-ntp/customize.js" integrity="sha256-EtIKSV82ixJHE3AzqhoiVbUGKG+Kd8XS0fFToow29o0="></script>
+  <script src="chrome-search://local-ntp/doodles.js" integrity="sha256-HqdPsO6hNmT/mfSeGdcX3eEGrZVva7AKD2Z2+1ujCZ8="></script>
+  <script src="chrome-search://local-ntp/local-ntp.js" integrity="sha256-VKboFBdOdpwCwCkw/y71xPwtM/YeZSZvOP8Fn2OijOM="></script>
+  <script src="chrome-search://local-ntp/utils.js" integrity="sha256-IEF9PjeyU0vsr61C8cm3JQOerOYWdBsaGddCSPp6tZs="></script>
+  
+  <meta name="google" value="notranslate">
+  <meta name="referrer" content="strict-origin">
+</head>
+<body class="light-chip win" style="--logo-color:rgba(238,238,238,1); background: rgb(255, 255, 255);">
+  <div id="custom-bg" style="opacity: 0;"></div>
+  <div id="custom-bg-preview"></div>
+  <!-- Container for the OneGoogleBar HTML. -->
+  <div id="one-google" class="show-element"></div>
+
+  <div id="ntp-contents">
+    <div id="logo">
+      <!-- The logo that is displayed in the absence of a doodle. -->
+      <div id="logo-default" title="Google"></div>
+      <!-- Logo displayed when theme prevents doodles. Doesn't fade. -->
+      <div id="logo-non-white" title="Google"></div>
+      <!-- A doodle, if any: its link and image. -->
+      <div id="logo-doodle" class="show-logo">
+        <div id="logo-doodle-container" class="show-logo">
+          <div id="logo-doodle-wrapper">
+            <button id="logo-doodle-button">
+              <img id="logo-doodle-image" tabindex="-1" title="To all coronavirus helpers, thank you" src="data:image/png;base64,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">
+            </button>
+          </div>
+        <button id="ddlsb" title="Share Doodle" style="left: 370px; top: 120px; background-color: rgba(255, 255, 255, 0.8);"><img id="ddlsb-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAoklEQVR42mP4P5OBgQzsAMQzgfgBFM+EisHVkGvoGSD+j4bPIBtOjsEzsRgKwzMpMfgBHoMfDDqDnYH4MqlBgS+mZYB4JZIBt4iNPFwxfRZqwWcoH0RXALELsckNX0zD8GogliM22IiJkE9A7EpqJJMU0+QYjC8oLlPiYlyRd4vSMMaV3ECxX05JqiCEyU7HNM15w7MQoml5TLMahGZ1HlEYAET0qWK/FZ+eAAAAAElFTkSuQmCC"></button></div>
+        <iframe id="logo-doodle-iframe" scrolling="no" src="./New Tab_files/saved_resource.html"></iframe>
+        <!-- A spinner, prompting the doodle. Visible on NTPs with customized
+             backgrounds. -->
+        <button id="logo-doodle-notifier" title="Click to view today’s doodle">
+          <div class="outer ball0"><div class="inner"></div></div>
+          <div class="outer ball1"><div class="inner"></div></div>
+          <div class="outer ball2"><div class="inner"></div></div>
+          <div class="outer ball3"><div class="inner"></div></div>
+        </button>
+      </div>
+    </div>
+
+    <div id="fakebox-container">
+      <div id="fakebox">
+        <div class="search-icon"></div>
+        <div id="fakebox-text">Search Google or type a URL</div>
+        <input id="fakebox-input" autocomplete="off" tabindex="-1" type="url" aria-hidden="true">
+        <div id="fakebox-cursor"></div>
+        <button id="fakebox-microphone" class="microphone-icon" title="Search by voice"></button>
+      </div>
+    </div>
+
+    <div id="realbox-container" hidden="">
+      <div id="realbox-input-wrapper">
+        <div id="realbox-icon" class="search-icon" data-realbox-icon-class="search-icon"></div>
+        <input id="realbox" type="search" autocomplete="off" spellcheck="false" aria-live="polite" autofocus="">
+        <button id="realbox-microphone" class="microphone-icon" hidden=""></button>
+        <div id="realbox-matches"></div>
+      </div>
+    </div>
+
+    <div id="user-content">
+      <!-- Search suggestions will be inserted here. -->
+      <div id="most-visited">
+        <!-- The container for the tiles. The MV iframe goes in here. -->
+        <div id="mv-tiles"><iframe id="mv-single" name="mv-single" title="Most visited" src="./New Tab_files/single.html"></iframe></div>
+      </div>
+    </div>
+
+    <!-- Notification shown when the tiles are modified. -->
+    <div id="mv-notice-container">
+      <div id="mv-notice" class="notice-hide" role="alert">
+        <span id="mv-msg">Shortcut removed</span>
+        <!-- Links in the notification. -->
+        <span id="mv-notice-links">
+          <span id="mv-undo" class="ripple" tabindex="0" role="button">Undo</span>
+          <span id="mv-restore" class="ripple" tabindex="0" role="button"></span>
+        </span>
+      </div>
+    </div>
+
+    <div id="attribution" style="display: none;"><div id="attribution-text">Theme created by</div></div>
+
+    <div id="error-notice-container">
+      <div id="error-notice" class="notice-hide" role="alert">
+        <span id="error-notice-icon"></span>
+        <span id="error-notice-msg"></span>
+        <span id="error-notice-link" class="ripple" tabindex="0" role="button"></span>
+      </div>
+    </div>
+
+    <div id="edit-bg" tabindex="0" role="button" class="ep-enhanced" aria-label="Customise this page" title="Customise this page">
+      <div id="edit-bg-icon"></div>
+      <span id="edit-bg-text">Customise</span>
+    </div>
+
+    <div id="custom-bg-attr"></div>
+  </div>
+
+  <dialog div="" id="edit-bg-dialog">
+    <div id="edit-bg-menu">
+      <div id="edit-bg-title">Customise this page</div>
+      <div id="edit-bg-default-wallpapers" class="bg-option" tabindex="0">
+        <div class="bg-option-img"></div>
+        <div id="edit-bg-default-wallpapers-text" class="bg-option-text">Chrome backgrounds</div>
+      </div>
+      <div id="edit-bg-upload-image" class="bg-option" tabindex="0">
+        <div class="bg-option-img"></div>
+        <div id="edit-bg-upload-image-text" class="bg-option-text">Upload an image</div>
+      </div>
+      <div id="edit-bg-divider"></div>
+      <div id="custom-links-restore-default" class="bg-option bg-option-disabled" tabindex="-1">
+        <div class="bg-option-img"></div>
+        <div id="custom-links-restore-default-text" class="bg-option-text">Restore default shortcuts</div>
+      </div>
+      <div id="edit-bg-restore-default" class="bg-option bg-option-disabled" tabindex="-1">
+        <div class="bg-option-img"></div>
+        <div id="edit-bg-restore-default-text" class="bg-option-text">Restore default background</div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="ddlsd">
+    <div id="ddlsd-title">To all coronavirus helpers, thank you</div>
+    <button id="ddlsd-close" title="Close"></button>
+    <div id="ddlsd-content">
+      <button id="ddlsd-fbb" class="ddlsd-sbtn" title="Facebook"></button>
+      <button id="ddlsd-twb" class="ddlsd-sbtn" title="Twitter"></button>
+      <button id="ddlsd-emb" class="ddlsd-sbtn" title="Email"></button>
+      <hr id="ddlsd-hr">
+      <div id="ddlsd-link">
+        <span id="ddlsd-text-ctr">
+          <input type="text" id="ddlsd-text" dir="ltr" readonly="true" title="Doodle Link">
+        </span>
+        <button id="ddlsd-copy" title="Copy link"></button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="bg-sel-menu" class="customize-dialog">
+    <div id="bg-sel-title-bar">
+    <div id="bg-sel-back-circle" tabindex="0" role="button" aria-label="Back">
+      <div id="bg-sel-back"></div>
+    </div>
+    <div id="bg-sel-title"></div>
+    </div>
+    <div id="bg-sel-tiles" tabindex="0"></div>
+    <div id="bg-sel-footer">
+      <button id="bg-sel-footer-cancel" class="bg-sel-footer-button paper secondary ripple" tabindex="0" aria-label="Cancel">Cancel</button>
+      <button id="bg-sel-footer-done" class="bg-sel-footer-button paper primary ripple" tabindex="-1" aria-label="Done" disabled="">Done</button>
+    </div>
+  </dialog>
+
+  <dialog id="customization-menu" class="customize-dialog">
+    <div id="menu-nav-panel" role="tablist" aria-label="Customise this page">
+      <button id="backgrounds-button" class="menu-option" tabindex="0" role="tab" aria-controls="backgrounds-menu backgrounds-image-menu" aria-selected="true" aria-labelledby="backgrounds-menu-option" title="Background">
+        <div class="menu-option-icon-wrapper">
+          <div id="backgrounds-icon" class="menu-option-icon"></div>
+        </div>
+        <div id="backgrounds-menu-option" class="menu-option-label">
+          Background
+        </div>
+      </button>
+      <button id="shortcuts-button" class="menu-option" tabindex="0" role="tab" aria-controls="shortcuts-menu" aria-selected="false" aria-labelledby="shortcuts-menu-option" title="Shortcuts">
+        <div class="menu-option-icon-wrapper">
+          <div id="shortcuts-icon" class="menu-option-icon"></div>
+        </div>
+        <div id="shortcuts-menu-option" class="menu-option-label">
+          Shortcuts
+        </div>
+      </button>
+      <button id="colors-button" class="menu-option" tabindex="0" role="tab" aria-controls="colors-menu" aria-selected="false" aria-labelledby="colors-menu-option" title="Colour and theme">
+        <div class="menu-option-icon-wrapper">
+          <div id="colors-icon" class="menu-option-icon"></div>
+        </div>
+        <div id="colors-menu-option" class="menu-option-label">
+          Colour and theme
+        </div>
+      </button>
+    </div>
+    <div id="menu-contents">
+      <div id="menu-header">
+        <div id="menu-back-circle" tabindex="0" role="button" aria-label="Back" title="Back">
+          <div id="menu-back"></div>
+        </div>
+        <div id="menu-title">Customise this page</div>
+        <div id="refresh-daily-wrapper">
+          <div id="refresh-toggle-wrapper" title="Refresh daily">
+            <label class="switch">
+              <input id="refresh-daily-toggle" type="checkbox" aria-labelledby="refresh-text">
+              <span class="toggle">
+                <div class="knob"></div>
+                <div class="highlight"></div>
+              </span>
+            </label>
+          </div>
+          <div id="refresh-text">Refresh daily</div>
+        </div>
+      </div>
+      <div id="backgrounds-menu" class="menu-panel" tabindex="0" role="tabpanel" aria-label="Background">
+        <div id="backgrounds-upload" class="bg-sel-tile-bg">
+          <div id="backgrounds-upload-icon" class="bg-sel-tile" tabindex="-1" role="button" aria-label="Upload from device" aria-pressed="false" title="Upload from device">
+            <div id="backgrounds-upload-arrow"></div>
+            <div id="backgrounds-upload-text">Upload from device</div>
+          </div>
+        </div>
+        <div id="backgrounds-default" class="bg-sel-tile-bg">
+          <div id="backgrounds-default-icon" class="bg-sel-tile" tabindex="-1" role="button" aria-label="No background" title="No background" aria-pressed="false">
+            <div class="mini-page">
+              <div class="mini-header-colorful"></div>
+              <div class="mini-shortcuts"></div>
+            </div>
+          </div>
+          <div class="bg-sel-tile-title">No background</div>
+        </div>
+      </div>
+      <div id="backgrounds-image-menu" class="menu-panel" tabindex="0" role="tabpanel" aria-label="Background"></div>
+      <div id="backgrounds-disabled-menu" class="menu-panel" tabindex="0" role="tabpanel" aria-label="Background">
+        <div id="backgrounds-disabled-wrapper">
+          <div id="backgrounds-disabled-icon"></div>
+          <div id="backgrounds-disabled-title">
+            Custom backgrounds have been turned off by your administrator
+          </div>
+        </div>
+      </div>
+      <div id="shortcuts-menu" class="menu-panel" tabindex="0" role="tabpanel" aria-label="Shortcuts">
+        <div id="sh-options">
+          <div class="sh-option">
+            <div id="sh-option-cl" class="sh-option-image" tabindex="-1" role="button" aria-pressed="false" aria-labelledby="sh-option-cl-title" title="My shortcuts">
+              <div class="sh-option-icon"></div>
+              <div class="sh-option-mini">
+                <div class="mini-page">
+                  <div class="mini-header"></div>
+                  <div class="mini-shortcuts"></div>
+                </div>
+              </div>
+            </div>
+            <div id="sh-option-cl-title" class="sh-option-title">
+              My shortcuts
+            </div>
+            Shortcuts are curated by you
+          </div>
+          <div class="sh-option">
+            <div id="sh-option-mv" class="sh-option-image" tabindex="-1" role="button" aria-pressed="false" aria-labelledby="sh-option-mv-title" title="Most-visited sites">
+              <div class="sh-option-icon"></div>
+              <div class="sh-option-mini">
+                <div class="mini-page">
+                  <div class="mini-header"></div>
+                  <div class="mini-shortcuts"></div>
+                </div>
+              </div>
+            </div>
+            <div id="sh-option-mv-title" class="sh-option-title">
+              Most-visited sites
+            </div>
+            Shortcuts are suggested based on websites that you visit often
+          </div>
+        </div>
+        <div id="sh-hide">
+          <div id="sh-hide-icon"></div>
+          <div>
+            <div id="sh-hide-title">Hide shortcuts</div>
+            Don't show shortcuts on this page
+          </div>
+          <div id="sh-hide-toggle-wrapper" title="Hide shortcuts">
+            <label class="switch">
+              <input id="sh-hide-toggle" type="checkbox" tabindex="-1" aria-labelledby="sh-hide-title">
+              <span class="toggle">
+                <div class="knob"></div>
+                <div class="highlight"></div>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div id="colors-menu" class="menu-panel" tabindex="0" role="tabpanel" aria-label="Colour and theme">
+        <div id="colors-theme" tabindex="0">
+            <div id="colors-theme-icon"></div>
+            <div id="colors-theme-info">
+              <div id="colors-theme-name"></div>
+              Current theme that you have installed
+            </div>
+            <a id="colors-theme-link" target="_blank">
+              <div id="colors-theme-link-icon"> </div>
+            </a>
+            <button id="colors-theme-uninstall" class="paper secondary">
+              Uninstall
+            </button>
+        </div>
+        <div id="color-picker-container" class="bg-sel-tile-bg">
+          <div id="color-picker-tile" class="bg-sel-tile" tabindex="-1" aria-label="Select colour" title="Select colour" role="button" aria-pressed="false">
+            <div id="left-semicircle"></div>
+            <div id="color-picker-icon"></div>
+            <input id="color-picker" type="color" style="display:none">
+            
+          </div>
+        </div>
+        <div id="colors-default" class="bg-sel-tile-bg">
+          <div id="colors-default-icon" class="bg-sel-tile" tabindex="-1" aria-label="Default" title="Default" role="button" aria-pressed="false">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="menu-footer">
+      <button id="menu-cancel" class="bg-sel-footer-button paper secondary ripple" title="Cancel">Cancel</button>
+      <button id="menu-done" class="bg-sel-footer-button paper primary ripple" title="Done">Done</button>
+    </div>
+  </dialog>
+
+  <dialog id="voice-overlay-dialog" class="overlay-dialog">
+    <div id="voice-overlay" class="overlay-hidden">
+      <button id="voice-close-button" class="close-button" title="Close" aria-label="Close">×</button>
+      <div id="voice-outer" class="outer">
+        <div class="inner-container">
+          <div id="voice-button-container" class="button-container">
+            <!-- The audio level animation. -->
+            <span id="voice-level" class="level"></span>
+            <!-- The microphone button. -->
+            <span id="voice-button" class="button">
+              <!-- The microphone icon (in CSS). -->
+              <div class="microphone">
+                <span class="receiver"></span>
+                <div class="wrapper">
+                  <span class="stem"></span>
+                  <span class="shell"></span>
+                </div>
+              </div>
+            </span>
+          </div>
+          <div id="text-container" aria-live="polite">
+            <!-- Low confidence text underneath high confidence text. -->
+            <span id="voice-text-i" class="voice-text"></span>
+            <!-- High confidence text on top of low confidence text. -->
+            <span id="voice-text-f" class="voice-text"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+  <div id="screen-reader-announcer" role="status" aria-live="polite"></div>
+
+  <div id="one-google-end-of-body"></div>
+
+  <script defer="" src="chrome-search://local-ntp/voice.js" integrity="sha256-C9ctze2LhHtwL+fcPVPkmVRYjQgXTGs4xfBAzlQwGWk="></script>
+
+
+<script id="search-suggestions-loader" src="chrome-search://local-ntp/search-suggestions.js"></script><script id="one-google-loader" src="chrome-search://local-ntp/one-google.js"></script><script id="promo-loader" src="chrome-search://local-ntp/promo.js"></script><script src="chrome-search://local-ntp/doodle.js"></script><dialog id="custom-links-edit-dialog" class="customize-dialog"><iframe id="custom-links-edit" name="custom-links-edit" title="Edit shortcut" src="./New Tab_files/edit.html"></iframe></dialog><script src="chrome-search://local-ntp/doodle.js?v=5"></script></body></html>
